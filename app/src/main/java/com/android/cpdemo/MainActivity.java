@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		switch (v.getId()) {
 
 			case R.id.btnInsert:
-//				insert();
+				insert();
 				break;
 
 			case R.id.btnUpdate:
@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //				queryAndDisplayAll();
 				break;
 		}
+	}
+
+	private void insert() {
+
 	}
 
 }
