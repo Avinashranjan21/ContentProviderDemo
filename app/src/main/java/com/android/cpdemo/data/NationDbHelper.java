@@ -1,10 +1,16 @@
 package com.android.cpdemo.data;
 
 
-public class NationDbHelper {
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+public class NationDbHelper extends SQLiteOpenHelper{
 
 	private static final String DATABASE_NAME = "nations.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
+	private static final String TAG = "NationDbHelper";
 
 	private final String SQL_CREATE_COUNTRY_TABLE
 			= "CREATE TABLE " + NationContract.NationEntry.TABLE_NAME
@@ -14,8 +20,29 @@ public class NationDbHelper {
 			+ ");";
 
 
+	// TODO: 07/01/18 This is called to create the database
+	public NationDbHelper(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		Log.d(TAG, "NationDbHelper: is called");
+	}
 
 
+	// TODO: 07/01/18 onCreate method only be called when  nations.db file dosent exist.
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(SQL_CREATE_COUNTRY_TABLE);
+		Log.d(TAG, "onCreate: is called");
+		
+	}
+
+	// TODO: 07/01/18 onUpgrade is called when nations.db file exists and database version is upgraded
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		Log.d(TAG, "onUpgrade: is called with OldVersion"+ oldVersion);
+		Log.d(TAG, "onUpgrade: is called with newVersion"+ newVersion);
+//		db.execSQL("drop the table countries");
+//		db.execSQL("create table countries with updated column");
+	}
 }
 
 
